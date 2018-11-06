@@ -1,0 +1,46 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# compiled source
+*.com
+*.class
+*.o
+*.so
+*.pyc
+
+# ide files
+.idea
+.ropeproject
+
+# virtualenv
+.venv
+
+# tox
+.tox
+
+# python cache
+__pycache__
+
+# pytest cache
+.cache
+.pytest_cache
+
+# settings file
+settings.yaml
+
+# ignore vim temporary files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+logs/*
+!logs/.gitkeep
