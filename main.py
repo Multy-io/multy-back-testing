@@ -7,7 +7,7 @@ from func.runner import run
 def get_input_args():
     return {
         # 'url': 'http://api.multy.io',
-        'url': 'http://176.9.2.82',
+        'url': 'http://test.multy.io',
         'cases': [
             'canary',
             'auth',

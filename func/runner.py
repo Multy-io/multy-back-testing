@@ -1,14 +1,15 @@
 import asyncio
+import traceback
 from func.cases import cases
 from common.utils import TestSession
 from common.logger import logger
+from common.http import BaseHttpRequest
 
 
 def run(input_args):
     loop = asyncio.get_event_loop()
 
     try:
-        # asyncio.ensure_future(run_task(input_args))
         loop.run_until_complete(run_task(input_args))
     except KeyboardInterrupt:
         logger.info('terminate tests launch')
@@ -17,6 +18,7 @@ def run(input_args):
         loop.close()
 
 async def run_task(input_args):
+    BaseHttpRequest.base_url = input_args['url']
     test_session = TestSession()
 
     for case_name in input_args.get('cases', []):
@@ -24,12 +26,12 @@ async def run_task(input_args):
             try:
                 await cases[case_name].run_tests(test_session=test_session)
                 test_session.inc_assertions_success()
-            except AssertionError as err:
+            except AssertionError:
                 test_session.inc_assertions_failed()
-                test_session.logger.error(f'assertion failed in [{case_name}] case with message [{str(err)}]')
-            except BaseException as err:
+                test_session.logger.error(f'assertion failed in [{case_name}] case with message [{traceback.format_exc()}]')
+            except BaseException:
                 test_session.inc_assertions_failed()
-                test_session.logger.fatal(f'unexpected error in [{case_name}] case with message [{str(err)}]')
+                test_session.logger.fatal(f'unexpected error in [{case_name}] case with message [{traceback.format_exc()}]')
 
     if test_session.is_passed():
         test_session.logger.info(f'PASSED, {test_session.assertions_success} total assertions')

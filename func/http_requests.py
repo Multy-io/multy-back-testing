@@ -1,10 +1,10 @@
-from common.http import AbstractHttpRequest
+from common.http import BaseHttpRequest
 
 
 class REQ:
 
-    class AUTH(AbstractHttpRequest):
+    class AUTH(BaseHttpRequest):
         method = 'post'
-        uri = '/api/v1/auth'
+        uri = '/auth'
         schema_request = 'multi:HttpAuthRequest'
         schema_response = 'multi:HttpAuthResponse'
