@@ -1,15 +1,28 @@
+import asyncio
 from func.cases import cases
 from common.utils import TestSession
+from common.logger import logger
 
 
 def run(input_args):
+    loop = asyncio.get_event_loop()
 
+    try:
+        # asyncio.ensure_future(run_task(input_args))
+        loop.run_until_complete(run_task(input_args))
+    except KeyboardInterrupt:
+        logger.info('terminate tests launch')
+    finally:
+        logger.info('close event loop')
+        loop.close()
+
+async def run_task(input_args):
     test_session = TestSession()
 
     for case_name in input_args.get('cases', []):
-        if case_name in cases: # and is callable
+        if case_name in cases:  # and is callable
             try:
-                cases[case_name].run_tests(test_session=test_session)
+                await cases[case_name].run_tests(test_session=test_session)
                 test_session.inc_assertions_success()
             except AssertionError as err:
                 test_session.inc_assertions_failed()

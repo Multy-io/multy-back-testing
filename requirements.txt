@@ -4,5 +4,6 @@ asyncio==3.4.3
 attrs==18.2.0
 chardet==3.0.4
 idna==2.7
+jsonschema==2.6.0
 multidict==4.4.2
 yarl==1.2.6
