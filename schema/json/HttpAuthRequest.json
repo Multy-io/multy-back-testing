@@ -1,0 +1,29 @@
+{
+    "description": "Jwt Auth Request",
+    "type": "object",
+    "properties": {
+        "userID": {
+            "type": "string"
+        },
+        "deviceID": {
+            "type": "string"
+        },
+        "deviceType": {
+            "type": "integer"
+        },
+        "appVersion": {
+            "type": "string"
+        },
+        "pushToken": {
+            "type": "string",
+            "enum": ["yes", "no"]
+        }
+    },
+    "required": [
+        "userID",
+        "deviceID",
+        "deviceType",
+        "appVersion",
+        "pushToken"
+    ]
+}

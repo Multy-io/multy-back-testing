@@ -9,10 +9,7 @@ async def run_tests(test_session):
 # async def test_failed(http_proxy, test_session):
 async def test_failed(test_session):
     auth_response = await HttpProxy.fire(
-        create_request(
-            REQ.AUTH,
-            body={}
-        ),
+        create_request(REQ.AUTH),
         200
     )
     # meta code

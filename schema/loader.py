@@ -35,7 +35,7 @@ def validate(data, schema, schema_name=None):
             resolver=jsonschema.RefResolver(
                 base_uri='',
                 referrer=None,
-                handlers={'multi': get_schema},
+                handlers={'multy': get_schema},
             )
         )
     except jsonschema.exceptions.ValidationError as err:

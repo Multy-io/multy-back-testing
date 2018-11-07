@@ -1,0 +1,16 @@
+{
+    "description": "Jwt Auth Response",
+    "type": "object",
+    "properties": {
+        "expire": {
+            "type": "string"
+        },
+        "token": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "expire",
+        "token"
+    ]
+}

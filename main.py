@@ -8,6 +8,7 @@ def get_input_args():
     return {
         # 'url': 'http://api.multy.io',
         'url': 'http://test.multy.io',
+        # 'url': 'http://127.0.0.1:6778',
         'cases': [
             'canary',
             'auth',
