@@ -6,4 +6,7 @@ chardet==3.0.4
 idna==2.7
 jsonschema==2.6.0
 multidict==4.4.2
+python-dateutil==2.7.5
+six==1.11.0
+websockets==7.0
 yarl==1.2.6
