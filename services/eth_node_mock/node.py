@@ -2,6 +2,7 @@ import asyncio
 from aiohttp import web
 import json
 import websockets
+from websockets.exceptions import ConnectionClosed
 
 
 class EthServer:
@@ -22,6 +23,28 @@ class EthWebsocketServer:
     async def start_server(self, loop):
         self.ws_handler_future = asyncio.ensure_future(websockets.serve(self.handle_connection, '127.0.0.1', 8545))
 
+        asyncio.gather(self.recurrent_broadcast())
+
+    async def recurrent_broadcast(self):
+        while 1:
+            try:
+                await self.broadcast({
+                    "jsonrpc": "2.0",
+                    "method": "eth_subscription",
+                    "params": {
+                        "subscription": "0xcd0c3e8af590364c09d0fa6a1210faf5",
+                        "result": {
+                            "difficulty": "0xd9263f42a87",
+                            "uncles": [],
+                        }
+                    }},
+                    sleep_timedelta=10,
+                )
+            except BaseException as err:
+                self.log(str(err))
+
+            await asyncio.sleep(3)
+
     async def stop_server(self):
         self.ws_handler_future.cancel()
 
@@ -29,21 +52,28 @@ class EthWebsocketServer:
         self.clients.add(websocket)
         self.log('new client connected')
 
-        async for message in websocket:
-            decoded_message = json.loads(message)
-            self.log('new message received')
-            self.log(message)
+        try:
+            async for message in websocket:
+                decoded_message = json.loads(message)
+                self.log('new message received')
+                self.log(message)
 
-            reply_dict = {
-                'jsonrpc': '2.0',
-                'id': decoded_message['id'],
-                'result': '0xcd0c3e8af590364c09d0fa6a1210faf5',
-            }
-            await websocket.send(json.dumps(reply_dict))
-            self.log(f"replied to client {id(websocket)}")
-            self.log(reply_dict)
+                reply_dict = {
+                    'jsonrpc': '2.0',
+                    'id': decoded_message['id'],
+                    'result': '0xcd0c3e8af590364c09d0fa6a1210faf5',
+                }
+                await websocket.send(json.dumps(reply_dict))
+                self.log(f"replied to client {id(websocket)}")
+                self.log(reply_dict)
+        except ConnectionClosed:
+            self.log(f"client closed connection {id(websocket)}")
+            self.clients.remove(websocket)
 
-    async def broadcast(self, json_message):
+    async def broadcast(self, json_message, sleep_timedelta = 0):
+        if sleep_timedelta > 0:
+            await asyncio.sleep(sleep_timedelta)
+
         for client in self.clients:
             await client.send(json.dumps(json_message))
             self.log(f"broadcast message to client {id(client)}")
