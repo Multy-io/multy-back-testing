@@ -3,9 +3,12 @@ async-timeout==3.0.1
 asyncio==3.4.3
 attrs==18.2.0
 chardet==3.0.4
+grpcio==1.16.0
+grpcio-tools==1.16.0
 idna==2.7
 jsonschema==2.6.0
 multidict==4.4.2
+protobuf==3.6.1
 python-dateutil==2.7.5
 six==1.11.0
 websockets==7.0

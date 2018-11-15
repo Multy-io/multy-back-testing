@@ -3,6 +3,7 @@ from aiohttp import web
 import json
 import websockets
 from websockets.exceptions import ConnectionClosed
+from services.eth_node_mock.structs import ETH_ROOT_TRANSACTION
 
 
 class EthServer:
@@ -34,8 +35,11 @@ class EthWebsocketServer:
                     "params": {
                         "subscription": "0xcd0c3e8af590364c09d0fa6a1210faf5",
                         "result": {
+                            "hash": "tmp-test-hash",
                             "difficulty": "0xd9263f42a87",
-                            "uncles": [],
+                            "uncles": [
+                                "0x80aacd1ea4c9da32efd8c2cc9ab38f8f70578fcd46a1a4ed73f82f3e0957f936"
+                            ],
                         }
                     }},
                     sleep_timedelta=10,
@@ -49,10 +53,10 @@ class EthWebsocketServer:
         self.ws_handler_future.cancel()
 
     async def handle_connection(self, websocket, path):
-        self.clients.add(websocket)
-        self.log('new client connected')
-
         try:
+            self.clients.add(websocket)
+            self.log('new client connected')
+
             async for message in websocket:
                 decoded_message = json.loads(message)
                 self.log('new message received')
@@ -87,26 +91,33 @@ class EthWebsocketServer:
 async def http_request_handler(request):
     if request.can_read_body:
         request_data = await request.json()
-        print('request (json) >> ', request_data)
-    else:
-        print('empty request body')
+        print('http >> ', request_data)
+        assert 'method' in request_data
+        assert 'id' in request_data
+
+        if request_data['method'] == 'eth_newPendingTransactionFilter':
+            response_data = "0x1"
+        elif request_data['method'] == 'eth_getBlockByHash':
+            block_hash, is_transaction_full = request_data['params']
+
+            response_data = ETH_ROOT_TRANSACTION
+            response_data['block_hash'] = block_hash
+        elif request_data['method'] == 'txpool_content':
+            response_data = {
+                "category": 10,
+                "hashTX": "default_hashTX",
+                "pending": {},
+            }
+
+    response = {
+        "id": request_data['id'],
+        "jsonrpc": "2.0",
+        "result": response_data,
+    }
+
+    print('http <<', response)
 
     return web.Response(
         content_type='application/json',
-        body=json.dumps({
-            "id": 1,
-            "jsonrpc": "2.0",
-            "result": json.dumps({
-                "admin": "1.0",
-                "db": "1.0",
-                "debug": "1.0",
-                "eth": "1.0",
-                "miner": "1.0",
-                "net": "1.0",
-                "personal": "1.0",
-                "shh": "1.0",
-                "txpool": "1.0",
-                "web3": "1.0"
-            })
-        })
+        body=json.dumps(response)
     )
