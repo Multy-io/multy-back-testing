@@ -1,0 +1,20 @@
+{
+    "description": "Wallet Create Response",
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "message": {
+            "type": "string"
+        },
+        "time": {
+            "type": "integer"
+        }
+    },
+    "required": [
+        "code",
+        "message",
+        "time"
+    ]
+}

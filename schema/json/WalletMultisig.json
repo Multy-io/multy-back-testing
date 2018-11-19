@@ -1,0 +1,32 @@
+{
+    "description": "Wallet Multisig Object",
+    "type": "object",
+    "properties": {
+        "isMultisig": {
+            "type": "boolean"
+        },
+        "signaturesRequired": {
+            "type": "integer"
+        },
+        "ownersCount": {
+            "type": "integer"
+        },
+        "inviteCode": {
+            "type": "string"
+        },
+        "isImported": {
+            "type": "boolean"
+        },
+        "contractAddress": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "isMultisig",
+        "signaturesRequired",
+        "ownersCount",
+        "inviteCode",
+        "isImported",
+        "contractAddress"
+    ]
+}

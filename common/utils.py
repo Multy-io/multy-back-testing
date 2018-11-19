@@ -1,5 +1,7 @@
 # import functools
 # import aiohttp
+import time
+import uuid
 from common.logger import logger
 
 
@@ -12,6 +14,7 @@ class TestSession:
 
     def __init__(self):
         self.logger = logger
+        self.user_context = {}
 
     @property
     def assertions_total(self):
@@ -26,6 +29,10 @@ class TestSession:
     def is_passed(self):
         return self.assertions_failed == 0
 
+    def save_user_context(self, **kwargs):
+        self.user_context = kwargs
+        return self
+
 
 # def http_proxy_decorator(func):
 #     @functools.wraps(func)
@@ -36,4 +43,5 @@ class TestSession:
 #     return wrapped
 
 
-
+def get_random_string():
+    return f"{time.time()}_{uuid.uuid4().hex[0:10]}"

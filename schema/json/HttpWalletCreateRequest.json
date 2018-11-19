@@ -1,0 +1,41 @@
+{
+    "description": "Create Wallet Request",
+    "type": "object",
+    "properties": {
+        "currencyID": {
+            "type": "integer"
+        },
+        "networkID": {
+            "type": "integer"
+        },
+        "address": {
+            "type": "string"
+        },
+        "addressIndex": {
+            "type": "integer"
+        },
+        "walletIndex": {
+            "type": "integer"
+        },
+        "walletName": {
+            "type": "string"
+        },
+        "isImported": {
+            "type": "boolean"
+        },
+        "multisig": {
+            "type": "object",
+            "$ref": "multy:WalletMultisig"
+        }
+    },
+    "required": [
+        "currencyID",
+        "networkID",
+        "address",
+        "addressIndex",
+        "walletIndex",
+        "walletName",
+        "isImported",
+        "multisig"
+    ]
+}

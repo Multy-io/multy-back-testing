@@ -24,7 +24,7 @@ class EthWebsocketServer:
     async def start_server(self, loop):
         self.ws_handler_future = asyncio.ensure_future(websockets.serve(self.handle_connection, '127.0.0.1', 8545))
 
-        asyncio.gather(self.recurrent_broadcast())
+        # asyncio.gather(self.recurrent_broadcast())
 
     async def recurrent_broadcast(self):
         while 1:
