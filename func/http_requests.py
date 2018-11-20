@@ -55,6 +55,9 @@ class REQ:
             }
         }
 
+    class WALLET_GET(BaseHttpRequest):
+        method = 'get'
+        uri = '/api/v1/wallets/verbose'
 
 # type WalletParams struct {
 # 	CurrencyID   int            `json:"currencyID"`
