@@ -8,6 +8,7 @@ def run():
 
     try:
         asyncio.ensure_future(app.start(loop))
+        print('node started')
         loop.run_forever()
     except (KeyboardInterrupt,):
         print('lets exit...')
