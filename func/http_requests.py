@@ -5,7 +5,6 @@ from common import consts
 
 
 class REQ:
-
     class AUTH(BaseHttpRequest):
         method = 'post'
         uri = '/auth'
@@ -58,23 +57,3 @@ class REQ:
     class WALLET_GET(BaseHttpRequest):
         method = 'get'
         uri = '/api/v1/wallets/verbose'
-
-# type WalletParams struct {
-# 	CurrencyID   int            `json:"currencyID"`
-# 	NetworkID    int            `json:"networkID"`
-# 	Address      string         `json:"address"`
-# 	AddressIndex int            `json:"addressIndex"`
-# 	WalletIndex  int            `json:"walletIndex"`
-# 	WalletName   string         `json:"walletName"`
-# 	IsImported   bool           `json:"isImported"`
-# 	Multisig     MultisigWallet `json:"multisig"`
-# }
-#
-# type MultisigWallet struct {
-# 	IsMultisig         bool   `json:"isMultisig"`
-# 	SignaturesRequired int    `json:"signaturesRequired"`
-# 	OwnersCount        int    `json:"ownersCount"`
-# 	InviteCode         string `json:"inviteCode"`
-# 	IsImported         bool   `json:"isImported"`
-# 	ContractAddress    string `json:"contractAddress"`
-# }

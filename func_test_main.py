@@ -1,19 +1,29 @@
+import argparse
 from func.runner import run
 
-# def run():
-#     input_args = get_input_args()
-#     print(input_args)
 
 def get_input_args():
+    default_api_url = 'http://127.0.0.1:6778'
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-u',
+        '--url',
+        help=f'Defines Multy Backend API endpoint, default [{default_api_url}]',
+        type=str,
+    )
+
+    # todo: parse cases list from args
+
+    args = parser.parse_args()
+
     return {
-        # 'url': 'http://api.multy.io',
-        # 'url': 'http://test.multy.io',
-        'url': 'http://127.0.0.1:6778',
+        'url': args.url or default_api_url,
         'cases': [
-            # 'canary',
-            # 'auth',
-            # 'server_config',
-            # 'donations'
+            'canary',
+            'auth',
+            'server_config',
+            'donations',
             'wallet',
         ]
     }

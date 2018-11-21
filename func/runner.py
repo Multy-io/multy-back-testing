@@ -22,6 +22,7 @@ async def run_task(input_args):
     test_session = TestSession()
 
     for case_name in input_args.get('cases', []):
+        test_session.logger.info(f'start test case [{case_name}]')
         if case_name in cases:  # and is callable
             try:
                 await cases[case_name].run_tests(test_session=test_session)
