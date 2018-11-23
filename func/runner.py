@@ -3,7 +3,7 @@ import traceback
 from func.cases import cases
 from common.utils import TestSession
 from common.logger import logger
-from common.http import BaseHttpRequest
+from common.http_helper import BaseHttpRequest
 
 
 def run(input_args):

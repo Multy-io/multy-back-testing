@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from common.http import HttpProxy, create_request
+from common.http_helper import HttpProxy, create_request
 from func.http_requests import REQ
 
 

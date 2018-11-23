@@ -1,6 +1,6 @@
 import random
 import string
-from common.http import BaseHttpRequest
+from common.http_helper import BaseHttpRequest
 from common import consts
 
 

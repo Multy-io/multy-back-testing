@@ -1,5 +1,3 @@
-# import functools
-# import aiohttp
 import time
 import uuid
 from common.logger import logger
@@ -9,11 +7,17 @@ HTTP_CALLS_TIMEOUT = 5  # in seconds
 
 
 class TestSession:
+    """
+    todo: isolate test_session and user_context
+    withing single test case we can emulate multiple client connections
+    which is not really possible(flexible) with one<to>one test_session and user_context rel
+    """
     assertions_success = assertions_failed = 0
     cases_failed = cases_success = 0
 
     def __init__(self):
         self.logger = logger
+        # {auth_token: }
         self.user_context = {}
 
     @property
@@ -32,15 +36,6 @@ class TestSession:
     def save_user_context(self, **kwargs):
         self.user_context = kwargs
         return self
-
-
-# def http_proxy_decorator(func):
-#     @functools.wraps(func)
-#     async def wrapped(*args, **kwargs):
-#         async with aiohttp.ClientSession(read_timeout=HTTP_CALLS_TIMEOUT) as http_session:
-#             await func(http_session, *args, **kwargs)
-#
-#     return wrapped
 
 
 def get_random_string():

@@ -25,6 +25,7 @@ def get_input_args():
             'server_config',
             'donations',
             'wallet',
+            'airdrop',
         ]
     }
 
