@@ -5,8 +5,8 @@ from common.utils import get_random_string
 
 
 class IOPacket:
-    TYPE_GET_RECEIVERS_AVAILABLE_WALLETS = 'event:receiver:wallets:available'
-    TYPE_RECEIVER_IS_ON = 'event:receiver:on'
+    TYPE_STARTUP_RECEIVERS_AVAILABLE = 'event:startup:receiver:available'
+    TYPE_STARTUP_RECEIVER_IS_ON = 'event:startup:receiver:on'
 
     def __str__(self):
         return f"<IOPacket type={self.get_type()}, data={self.get_data()}>"

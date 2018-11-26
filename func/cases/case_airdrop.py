@@ -43,20 +43,23 @@ async def test_airdrop(test_session):
     await receiver2.establish_connection()
     await sender1.establish_connection()
 
-    await receiver1.send(IOPacket(_type=IOPacket.TYPE_RECEIVER_IS_ON, data={
+    await receiver1.send(IOPacket(_type=IOPacket.TYPE_STARTUP_RECEIVER_IS_ON, data={
         'userid': receiver1_id,
         'usercode': receiver1_id,
     }))
-    await receiver2.send(IOPacket(_type=IOPacket.TYPE_RECEIVER_IS_ON, data={
+    await receiver2.send(IOPacket(_type=IOPacket.TYPE_STARTUP_RECEIVER_IS_ON, data={
         'userid': receiver2_id,
         'usercode': receiver2_id,
     }))
 
     await asyncio.sleep(1)
 
-    await sender1.send(IOPacket(_type=IOPacket.TYPE_GET_RECEIVERS_AVAILABLE_WALLETS, data={
+    await sender1.send(IOPacket(_type=IOPacket.TYPE_STARTUP_RECEIVERS_AVAILABLE, data={
         'ids': [receiver1_id]
     }))
     io_packet_response = await sender1.recv()
-    assert len(io_packet_response.data) == 1
-    assert io_packet_response.data[0]['userid'] == u1_user_id
+    assert len(io_packet_response.data) == 1, 'invalid available receivers amount'
+    assert io_packet_response.data[0]['userid'] == u1_user_id, 'receiver id miss match'
+    supported_addrs = io_packet_response.data[0]['supportedAddresses']
+    assert len(supported_addrs) > 0
+    assert supported_addrs[0]['address'] == receiver1_wallet_address, 'wallet address miss match for receiver1'
