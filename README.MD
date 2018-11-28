@@ -1,6 +1,6 @@
 ## Setup
 1. Get python 3.6+
-2. virualenv -p python3.6 env
+2. virtualenv -p python3.6 env
 3. source env/bin/activate
 4. clone project
 5. cd $PROJECT_ROOT
