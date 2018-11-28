@@ -21,6 +21,6 @@ Requests and responses are validated via [json schemas](https://github.com/Multy
 Test cases can be launched with `python func_test_main.py`
 
 By default functional tests are trying to connect to localhost project.
-In order to launch tests on another backend instans, `url` parameter can be provided.
+In order to launch tests on another backend instance, `url` parameter can be provided.
 
 `python func_test_main.py --url "http://api.multy.io"`
