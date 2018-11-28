@@ -1,8 +1,10 @@
 ## Setup
 1. Get python 3.6+
-2. clone project
-3. cd $PROJECT_ROOT
-4. `pip install -r requirements.txt`
+2. virualenv -p python3.6 env
+3. source env/bin/activate
+4. clone project
+5. cd $PROJECT_ROOT
+6. `pip install -r requirements.txt`
 
 
 
