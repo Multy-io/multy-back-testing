@@ -49,6 +49,7 @@ class HttpProxy:
                 }
 
             async with rest_call(req.get_url(), **rest_call_kwargs) as response:
+                parsed = await response.text()
                 response_data = await response.json()
 
                 assert expected_status == response.status
@@ -61,8 +62,6 @@ class HttpProxy:
                 return response_data
 
 
-
-
 class BaseHttpRequest:
     DEFAULT_HTTP_TIMEOUT = 5
     # populates on startup with url from input_args
@@ -72,7 +71,8 @@ class BaseHttpRequest:
     body = None
 
     def get_method(self):
-        assert self.method and self.method.lower() in ['get', 'post', 'delete', 'put']
+        assert self.method and self.method.lower(
+        ) in ['get', 'post', 'delete', 'put']
         return self.method
 
     def is_request_body_provided(self):

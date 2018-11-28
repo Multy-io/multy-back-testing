@@ -17,7 +17,7 @@ async def test_wallet_create(test_session):
 
     create_wallet_request = create_request(REQ.WALLET_CREATE)
     create_wallet_request.body['address'] = get_random_string()
-    
+
     await HttpProxy.fire(create_wallet_request, expected_status=201, test_session=test_session)
     await HttpProxy.fire(create_wallet_request, expected_status=400, test_session=test_session)
 

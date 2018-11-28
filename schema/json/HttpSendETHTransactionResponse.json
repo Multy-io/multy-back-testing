@@ -1,0 +1,24 @@
+{
+    "description": "eth send tx response",
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "message": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "message"
+            ]
+        }
+    },
+    "required": [
+        "code",
+        "message"
+    ]
+}

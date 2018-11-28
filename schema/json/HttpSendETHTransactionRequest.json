@@ -1,0 +1,21 @@
+{
+    "description": "send eth transaction request",
+    "type": "object",
+    "properties": {
+        "currencyID": {
+            "type": "integer"
+        },
+        "networkID": {
+            "type": "integer"
+        },
+        "payload": {
+            "type": "object",
+            "$ref": "multy:SendETHTransactionPayload"
+        }
+    },
+    "required": [
+        "currencyID",
+        "networkID",
+        "payload"
+    ]
+}

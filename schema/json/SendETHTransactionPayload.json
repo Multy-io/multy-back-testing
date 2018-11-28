@@ -1,0 +1,20 @@
+{
+    "description": "send tx payload",
+    "type": "object",
+    "properties": {
+        "ishd": {
+            "type": "boolean"
+        },
+        "address": {
+            "type": "string"
+        },
+        "transaction": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "ishd",
+        "address",
+        "transaction"
+    ]
+}
