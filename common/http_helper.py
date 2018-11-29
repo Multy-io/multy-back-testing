@@ -49,6 +49,7 @@ class HttpProxy:
                 }
 
             async with rest_call(req.get_url(), **rest_call_kwargs) as response:
+                response_data = await response.json()
                 assert expected_status == response.status
                 if req.schema_response and response.status in [HTTP_OK, HTTP_CREATED]:
                     schema_loader.validate(

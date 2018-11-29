@@ -22,6 +22,7 @@ def get_input_args():
         'cases': [
             'canary',
             'send_transaction',
+            # 'last_action_time_wallet_eth',
             # 'auth',
             # 'server_config',
             # 'donations',
