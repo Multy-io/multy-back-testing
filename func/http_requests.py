@@ -63,7 +63,6 @@ class REQ:
         method = 'post'
         uri = '/api/v1/transaction/send'
 
-        # TODO: schema check need
         schema_request = 'multy:HttpSendETHTransactionRequest'
         schema_response = 'multy:HttpSendETHTransactionResponse'
 
@@ -71,8 +70,8 @@ class REQ:
             'currencyID': 0,
             'networkID': 0,
             'payload': {
-                'address': "",
-                'transaction': "",
-                "ishd": False
+                'address': '',
+                'transaction': '',
+                'ishd': False
             }
         }
