@@ -75,3 +75,37 @@ class REQ:
                 'ishd': False
             }
         }
+
+    class GET_EXCHANGER_CURRENCIES(BaseHttpRequest):
+        method = 'get'
+        uri = '/api/v1/exchanger/supported_currencies'
+
+        schema_request = None
+        schema_response = 'multy:HttpExchangerGetSupportedCurrenciesResponse'
+
+    class GET_EXCHANGER_AMOUNT_TO_EXCHANGE(BaseHttpRequest):
+        method = 'post'
+        uri = '/api/v1/exchanger/exchange_amount'
+
+        schema_request = 'multy:HttpExchangerGetExchangeAmountRequest'
+        schema_response = 'multy:HttpExchangerGetExchangeAmountResponse'
+
+        body = {
+            'from': 'btc',
+            'to': 'eth',
+            'amount': 1.2,
+        }
+
+    class EXCHANGER_CREATE_TRANSACTION(BaseHttpRequest):
+        method = 'post'
+        uri = '/api/v1/exchanger/transaction'
+
+        schema_request = 'multy:HttpExchangerCreateTransactionRequest'
+        schema_response = 'multy:HttpExchangerCreateTransactionResponse'
+
+        body = {
+            'from': 'btc',
+            'to': 'eth',
+            'amount': 1.2,
+            'address': '0xe6001AEb462B880A202597CAA3ad064093dD4880',
+        }

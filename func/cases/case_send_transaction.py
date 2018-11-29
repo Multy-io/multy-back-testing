@@ -20,11 +20,13 @@ async def test_send_transaction(test_session):
     test_session.save_user_context(auth_token=auth_response['token'])
 
     create_send_eth_transaction_request = create_request(REQ.SEND_TRANSACTION)
-    create_send_eth_transaction_request.body["payload"]["address"] = get_random_hex(
-        42)
-    create_send_eth_transaction_request.body["payload"]["transaction"] = get_random_hex(
-        84)
+    create_send_eth_transaction_request.body["payload"]["address"] = get_random_hex(42)
+    create_send_eth_transaction_request.body["payload"]["transaction"] = get_random_hex(84)
     create_send_eth_transaction_request.body["currencyID"] = consts.ETH_CURRENCY_ID_ETH
     create_send_eth_transaction_request.body["networkID"] = consts.ETH_CURRENCY_NETWORK
 
-    r = await HttpProxy.fire(create_send_eth_transaction_request, expected_status=http_helper.HTTP_OK, test_session=test_session)
+    await HttpProxy.fire(
+        create_send_eth_transaction_request,
+        expected_status=http_helper.HTTP_OK,
+        test_session=test_session,
+    )

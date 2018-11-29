@@ -1,0 +1,21 @@
+{
+    "description": "Get Exchange Amount Request",
+    "type": "object",
+    "properties": {
+        "from": {
+            "type": "string"
+        },
+        "to": {
+            "type": "string"
+        },
+        "amount": {
+            "type": "number",
+            "minimum": 0
+        }
+    },
+    "required": [
+        "from",
+        "to",
+        "amount"
+    ]
+}

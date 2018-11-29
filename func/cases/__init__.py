@@ -3,8 +3,7 @@ import sys
 
 fixtures_path = os.path.dirname(__file__)
 fixtures_files = sorted(os.listdir(fixtures_path))
-scenario_module_names = [mod[:-3]
-                         for mod in fixtures_files if mod.startswith('case_')]
+scenario_module_names = [mod[:-3]for mod in fixtures_files if mod.startswith('case_')]
 sys.path.append(fixtures_path)
 
 

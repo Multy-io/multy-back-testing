@@ -1,0 +1,25 @@
+{
+    "description": "Create Exchanger Transaction Request",
+    "type": "object",
+    "properties": {
+        "from": {
+            "type": "string"
+        },
+        "to": {
+            "type": "string"
+        },
+        "amount": {
+            "type": "number",
+            "minimum": 0
+        },
+        "address": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "from",
+        "to",
+        "amount",
+        "address"
+    ]
+}

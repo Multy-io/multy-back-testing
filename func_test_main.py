@@ -21,7 +21,8 @@ def get_input_args():
         'url': args.url or default_api_url,
         'cases': [
             'canary',
-            'send_transaction',
+            'exchanger',
+            # 'send_transaction',
             # 'auth',
             # 'server_config',
             # 'donations',

@@ -1,0 +1,31 @@
+{
+    "description": "Create Exchanger Transaction Response",
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "message": {
+            "type": "string"
+        },
+        "transactionId": {
+            "type": "string",
+            "minLength": 10
+        },
+        "payinAddress": {
+            "type": "string",
+            "minLength": 10
+        },
+        "payoutAddress": {
+            "type": "string",
+            "minLength": 10
+        }
+    },
+    "required": [
+        "code",
+        "message",
+        "transactionId",
+        "payinAddress",
+        "payoutAddress"
+    ]
+}
