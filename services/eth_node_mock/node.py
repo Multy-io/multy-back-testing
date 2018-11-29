@@ -4,6 +4,7 @@ import json
 import websockets
 from websockets.exceptions import ConnectionClosed
 from services.eth_node_mock.structs import ETH_ROOT_TRANSACTION
+from common.utils import get_random_hex
 
 
 class EthServer:
@@ -22,7 +23,8 @@ class EthWebsocketServer:
         self.ws_handler_future = None
 
     async def start_server(self, loop):
-        self.ws_handler_future = asyncio.ensure_future(websockets.serve(self.handle_connection, '127.0.0.1', 8545))
+        self.ws_handler_future = asyncio.ensure_future(
+            websockets.serve(self.handle_connection, '127.0.0.1', 8545))
 
         # asyncio.gather(self.recurrent_broadcast())
 
@@ -74,7 +76,7 @@ class EthWebsocketServer:
             self.log(f"client closed connection {id(websocket)}")
             self.clients.remove(websocket)
 
-    async def broadcast(self, json_message, sleep_timedelta = 0):
+    async def broadcast(self, json_message, sleep_timedelta=0):
         if sleep_timedelta > 0:
             await asyncio.sleep(sleep_timedelta)
 
@@ -82,7 +84,6 @@ class EthWebsocketServer:
             await client.send(json.dumps(json_message))
             self.log(f"broadcast message to client {id(client)}")
             self.log(json_message)
-
 
     def log(self, message):
         print(f"eth >> {message}")
@@ -108,6 +109,9 @@ async def http_request_handler(request):
                 "hashTX": "default_hashTX",
                 "pending": {},
             }
+        elif request_data['method'] == 'eth_sendRawTransaction':
+            # 65 is standard length of eth transaction
+            response_data = get_random_hex(65)
 
     response = {
         "id": request_data['id'],

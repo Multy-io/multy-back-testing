@@ -2,6 +2,7 @@ import random
 import string
 from common.http_helper import BaseHttpRequest
 from common import consts
+from common.utils import get_random_hex
 
 
 class REQ:
@@ -57,3 +58,20 @@ class REQ:
     class WALLET_GET(BaseHttpRequest):
         method = 'get'
         uri = '/api/v1/wallets/verbose'
+
+    class SEND_TRANSACTION(BaseHttpRequest):
+        method = 'post'
+        uri = '/api/v1/transaction/send'
+
+        schema_request = 'multy:HttpSendETHTransactionRequest'
+        schema_response = 'multy:HttpSendETHTransactionResponse'
+
+        body = {
+            'currencyID': 0,
+            'networkID': 0,
+            'payload': {
+                'address': '',
+                'transaction': '',
+                'ishd': False
+            }
+        }

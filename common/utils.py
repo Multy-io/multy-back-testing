@@ -1,6 +1,7 @@
 import time
 import uuid
 from common.logger import logger
+import random
 
 
 HTTP_CALLS_TIMEOUT = 5  # in seconds
@@ -8,7 +9,7 @@ HTTP_CALLS_TIMEOUT = 5  # in seconds
 
 class TestSession:
     """
-    todo: isolate test_session and user_context
+    TODO: isolate test_session and user_context
     withing single test case we can emulate multiple client connections
     which is not really possible(flexible) with one<to>one test_session and user_context rel
     """
@@ -22,7 +23,7 @@ class TestSession:
 
     @property
     def assertions_total(self):
-        return self.assertions_error + self.assertions_success
+        return self.assertions_failed + self.assertions_success
 
     def inc_assertions_success(self):
         self.assertions_success += 1
@@ -40,3 +41,17 @@ class TestSession:
 
 def get_random_string():
     return f"{time.time()}_{uuid.uuid4().hex[0:10]}"
+
+
+def get_random_hex(size=1):
+    result = []
+
+    if size > 3:
+        size -= 3
+
+    result.append("0x")
+    result.append(str(random.choice("0123456789ABCDEF")))
+
+    for i in range(size):
+        result.append(str(random.choice("0123456789ABCDEF")))
+    return "".join(result).lower()

@@ -21,11 +21,12 @@ def get_input_args():
         'url': args.url or default_api_url,
         'cases': [
             'canary',
-            'auth',
-            'server_config',
-            'donations',
-            'wallet',
-            'airdrop',
+            'send_transaction',
+            # 'auth',
+            # 'server_config',
+            # 'donations',
+            # 'wallet',
+            # 'airdrop',
         ]
     }
 
