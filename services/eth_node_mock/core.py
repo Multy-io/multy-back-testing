@@ -7,13 +7,16 @@ class App:
         self.eth_node = None
         self.http_server = None
 
-    async def start(self, loop):
-        self.eth_node = EthWebsocketServer('127.0.0.1', 8545)
+    async def start(self, input_args, loop):
+        api_url = input_args['url']
+        ws_url = input_args['ws']
+
+        self.eth_node = EthWebsocketServer(*api_url.split(':'))
         await self.eth_node.start_server(loop)
 
         self.http_server = await loop.create_server(
             web.Server(http_request_handler),
-            *'127.0.0.1:18545'.split(':'),
+            *ws_url.split(':'),
         )
 
     async def stop(self):

@@ -14,6 +14,8 @@ So we provide python mocked node to emulate connections and events, required for
 
 ETH Node can be launched with `python eth_service_main.py` command
 
+Additional params can be provided, like `python eth_service_main.py --url "0.0.0.0:82" --ws "0.0.0.0:83"`
+
 ## Functional tests
 Functional tests party covers Multy Back HTTP API.
 
