@@ -16,10 +16,11 @@ class TestSession:
     assertions_success = assertions_failed = 0
     cases_failed = cases_success = 0
 
-    def __init__(self):
+    def __init__(self, session_input_args=None):
         self.logger = logger
         # {auth_token: }
         self.user_context = {}
+        self.session_input_args = session_input_args or {}
 
     @property
     def assertions_total(self):

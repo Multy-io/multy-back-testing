@@ -6,15 +6,13 @@ from common.utils import get_random_string
 from func.http_requests import REQ
 
 
-# todo: move to configuration
-URL = 'ws://127.0.0.1:6780/socket.io/'
-
-
 async def run_tests(test_session):
     await test_airdrop(test_session)
 
 
 async def test_airdrop(test_session):
+    ws_url = test_session.session_input_args['ws']
+
     # prepare 1 auth session with created wallet
     u1_auth_request = create_request(REQ.AUTH)
     u1_auth_request.body['userID'] = u1_user_id = get_random_string()
@@ -32,9 +30,9 @@ async def test_airdrop(test_session):
     await HttpProxy.fire(create_wallet_request, expected_status=201, test_session=test_session)
 
     receiver1_id, receiver2_id = u1_user_id, 'rec2'
-    receiver1 = SocketIOConnection(URL)
-    receiver2 = SocketIOConnection(URL)
-    sender1 = SocketIOConnection(URL)
+    receiver1 = SocketIOConnection(ws_url)
+    receiver2 = SocketIOConnection(ws_url)
+    sender1 = SocketIOConnection(ws_url)
 
     receiver1.update_dummy_user_headers(userID=receiver1_id)
     receiver2.update_dummy_user_headers(userID=receiver2_id)

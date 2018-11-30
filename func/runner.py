@@ -20,7 +20,7 @@ def run(input_args):
 
 async def run_task(input_args):
     BaseHttpRequest.base_url = input_args['url']
-    test_session = TestSession()
+    test_session = TestSession(session_input_args=input_args)
 
     for case_name in input_args.get('cases', []):
         test_session.logger.info(f'start test case [{case_name}]')
@@ -40,7 +40,9 @@ async def run_task(input_args):
     if test_session.is_passed():
         test_session.logger.info(
             f'PASSED, {test_session.assertions_success} total assertions')
+        exit(0)
     else:
         test_session.logger.error(
             f'FAILED, {test_session.assertions_success} success assertions and {test_session.assertions_failed} failed'
         )
+        exit(1)

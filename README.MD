@@ -23,4 +23,6 @@ Test cases can be launched with `python func_test_main.py`
 By default functional tests are trying to connect to localhost project.
 In order to launch tests on another backend instance, `url` parameter can be provided.
 
-`python func_test_main.py --url "http://api.multy.io"`
+`python func_test_main.py --url "http://test.multy.io" --ws "ws://test.multy.io/socket.io/"`
+
+When tests are succeeded, system exit(0) signal will be fired, in other case when tests are failed exit(1) will be triggered
