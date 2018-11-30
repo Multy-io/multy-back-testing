@@ -26,3 +26,5 @@ In order to launch tests on another backend instance, `url` parameter can be pro
 `python func_test_main.py --url "http://test.multy.io" --ws "ws://test.multy.io/socket.io/"`
 
 When tests are succeeded, system exit(0) signal will be fired, in other case when tests are failed exit(1) will be triggered
+
+Please, use `func_test_main.py --help` for all available input args list.
