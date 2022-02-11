@@ -12,7 +12,7 @@ idna==2.7
 jsonschema==2.6.0
 multidict==4.4.2
 post==2018.11.20
-protobuf==3.6.1
+protobuf==3.15.0
 public==2018.11.20
 python-dateutil==2.7.5
 pytz==2018.7
